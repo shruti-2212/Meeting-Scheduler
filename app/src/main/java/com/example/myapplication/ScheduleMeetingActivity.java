@@ -56,7 +56,7 @@ public class ScheduleMeetingActivity extends AppCompatActivity implements View.O
     List<Data> scheduleList = new ArrayList<>();
     List<Date> startTimeList = new ArrayList<>();
     List<Date> endTimeList = new ArrayList<>();
-    List<String> participants = new ArrayList<>();
+    List<Slot> slotList = new ArrayList<>();
     public static SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm",Locale.ENGLISH);
 
     @Override
@@ -74,8 +74,9 @@ public class ScheduleMeetingActivity extends AppCompatActivity implements View.O
             try {
             start = timeFormatter.parse(data.getStartTime());
             end  = timeFormatter.parse(data.getStartTime());
-                startTimeList.add(start);
-                endTimeList.add(end);
+//                startTimeList.add(start);
+//                endTimeList.add(end);
+                slotList.add(new Slot(start,end));
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -171,6 +172,7 @@ public class ScheduleMeetingActivity extends AppCompatActivity implements View.O
         }
     }
     public void onSubmitClicked() {
+
         try {
             if (!TextUtils.isEmpty(selectedStartTime)) {
                 startTimeList.remove(timeFormatter.parse(selectedStartTime));
@@ -186,40 +188,59 @@ public class ScheduleMeetingActivity extends AppCompatActivity implements View.O
 
              startTime = timeFormatter.parse(selectedStartTime);
              endTime = timeFormatter.parse(selectedEndTime);
-             startTimeList.add(startTime);
-             endTimeList.add(endTime);
+//             startTimeList.add(startTime);
+//             endTimeList.add(endTime);
 
-        Collections.sort(startTimeList);
-        Collections.sort(endTimeList);
-        Log.v("Tag","Start "+startTimeList);
-        Log.v("Tag","End "+endTimeList);
+            Slot slotEntered = new Slot(startTime,endTime);
+
 
         //Check Slot
 
-        Toast.makeText(this,correctSlot(startTimeList,endTimeList),Toast.LENGTH_LONG).show();
+        Toast.makeText(this,correctSlot(slotList,slotEntered),Toast.LENGTH_LONG).show();
         }catch (Exception e){
 
         }
     }
 
 
-    public String correctSlot(List<Date> startTime, List<Date> endTime){
+//    public String correctSlot(List<Date> startTime, List<Date> endTime){
+//
+//        Boolean lock=false;
+//        Boolean flag=false;
+//
+//        for(int i=0,j=0; i<startTime.size()||j<endTime.size(); ){
+//
+//            if(startTime.get(i).before(endTime.get(j))){
+//                if(lock){flag=true;break;}
+//                lock=true;
+//                i++;
+//            }
+//
+//            else{
+//                if(!lock){flag=true;break;}
+//                lock=false;
+//                j++;
+//            }
+//        }
+//
+//        if(flag)
+//            return ("Slot not Available");
+//        else
+//            return ("Slot Available");
+//    }
 
-        Boolean lock=false;
+    static String correctSlot(List<Slot> meetingSlots, Slot check){
+
+
         Boolean flag=false;
 
-        for(int i=0,j=0; i<startTime.size()||j<endTime.size(); ){
+        for(int i=0; i<meetingSlots.size();i++){
 
-            if(startTime.get(i).before(endTime.get(j))){
-                if(lock){flag=true;break;}
-                lock=true;
-                i++;
-            }
+            if((check.getStartTime().before(meetingSlots.get(i).getEndTime())&&check.getStartTime().after(meetingSlots.get(i).getEndTime()))
+                    || (check.getEndTime().before(meetingSlots.get(i).getEndTime())&&check.getEndTime().after(meetingSlots.get(i).getStartTime()))){
 
-            else{
-                if(!lock){flag=true;break;}
-                lock=false;
-                j++;
+                flag=true;
+                break;
             }
         }
 
@@ -228,5 +249,4 @@ public class ScheduleMeetingActivity extends AppCompatActivity implements View.O
         else
             return ("Slot Available");
     }
-
 }
