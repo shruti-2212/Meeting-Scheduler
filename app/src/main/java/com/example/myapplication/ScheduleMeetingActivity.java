@@ -73,7 +73,7 @@ public class ScheduleMeetingActivity extends AppCompatActivity implements View.O
             Date start,end;
             try {
             start = timeFormatter.parse(data.getStartTime());
-            end  = timeFormatter.parse(data.getStartTime());
+            end  = timeFormatter.parse(data.getEndTime());
 //                startTimeList.add(start);
 //                endTimeList.add(end);
                 slotList.add(new Slot(start,end));
