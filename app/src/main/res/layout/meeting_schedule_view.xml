@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/topBarMeeting"
+        layout="@layout/top_bar_meeting_schedule"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/edit_txt_date"
+        />
+
+
+        <EditText
+            android:importantForAutofill="noExcludeDescendants"
+            android:id="@+id/edit_txt_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textNoSuggestions"
+            android:focusableInTouchMode="false"
+            android:hint="Select Meeting date"
+            android:layout_margin="16dp"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topBarMeeting"/>
+
+
+
+        <EditText
+            android:importantForAutofill="noExcludeDescendants"
+            android:id="@+id/edit_txt_startTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textNoSuggestions"
+            android:focusableInTouchMode="false"
+            android:layout_margin="16dp"
+            android:hint="Select Start Time"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_txt_date"/>
+
+
+        <EditText
+            android:importantForAutofill="noExcludeDescendants"
+            android:id="@+id/edit_txt_endTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
+            android:hint="Select End Time"
+            android:layout_margin="16dp"
+            android:inputType="textNoSuggestions"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edit_txt_startTime"/>
+
+
+    <EditText
+        android:id="@+id/desc_edt"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="18dp"
+        android:gravity="start"
+        android:maxLength="4000"
+        android:overScrollMode="always"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+        android:background="@drawable/edt_border"
+        android:inputType="textMultiLine"
+        android:textColor="@color/web_view_txt_color"
+        android:hint="Description"
+        android:padding="8dp"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_txt_endTime"
+        />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/lightest_gray_box"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc_edt"
+        android:layout_margin="20dp"
+        >
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/submit_meeting_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:textSize="16sp"
+            android:textAllCaps="true"
+            android:background="@drawable/btn_rect_red_outline_dark_red"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:text="Submit"
+            />
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
